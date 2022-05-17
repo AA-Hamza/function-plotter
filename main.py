@@ -56,7 +56,10 @@ class App(tk.Frame):
             messagebox.showerror("Error", str(err))
 
     def plot(self):
-        plt.plot(self.equation_solver.eval_expression())
+        np_array =self.equation_solver.eval_expression() 
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.plot(np_array[:, 0], np_array[:, 1])
         plt.show()
 
 

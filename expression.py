@@ -4,7 +4,7 @@ import numpy as np
 
 _OPERATORS = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul, ast.Pow: op.pow, ast.USub: op.neg}
 _MAX_STEP_INVERSE = 100
-_VALID_EXPR_SYMBOLS = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '/', '*', '^', 'x'}
+_VALID_EXPR_SYMBOLS = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '/', '*', '^', 'x', '(', ')', '.'}
 
 # it should be safe as we aren't using eval
 # I definetly would have taken a different route if I had the time
@@ -16,15 +16,18 @@ class Expression:
     def __init__(self, expr:str, start:float, end:float):
         self.expr = expr.replace("^", "**")      # Translate ^ to ** (Python's pow), needed for ast.Pow
         # basic validation, not really needed, gives a better error message
-        for char in expr:
+        for char in self.expr:
             if char not in _VALID_EXPR_SYMBOLS:
                 raise Exception("Unrecognized symbol: "+char)
 
         # If python couldn't parse it
         try:
-            self.tree_root = ast.parse(expr, mode='eval')
+            self.tree_root = ast.parse(self.expr, mode='eval')
         except:
             raise Exception("Invalid Equation")
+
+        if (start >= end):
+            raise Exception("Min Value should be smaller than Max Value")
 
         self.start = start
         self.end = end
