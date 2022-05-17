@@ -2,7 +2,7 @@ import ast
 import operator as op
 import numpy as np
 
-_OPERATORS = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul, ast.Pow: op.pow, ast.USub: op.neg}
+_OPERATORS = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul, ast.Div: op.truediv, ast.Pow: op.pow, ast.USub: op.neg}
 _MAX_STEP_INVERSE = 100
 _VALID_EXPR_SYMBOLS = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '/', '*', '^', 'x', '(', ')', '.'}
 
