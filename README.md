@@ -18,6 +18,11 @@ pytest          # needed for the tests
 ```
 
 ### How to run
+to install the dependiencies
+```
+pip install -r requirements.txt
+```
+to run the program
 ```
 python3 main.py
 ```
